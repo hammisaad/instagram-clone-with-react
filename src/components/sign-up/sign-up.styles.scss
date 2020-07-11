@@ -1,0 +1,25 @@
+.sign-up {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 320px;
+  margin: auto;
+  padding: 20px;
+  object-fit: contain;
+  border: 1px solid lightgray;
+
+  .instagram-logo {
+    margin-bottom: 20px;
+    width: 35%;
+  }
+
+  p {
+    width: 80%;
+    margin: 10px auto 0px;
+    a {
+      color: #0095f6;
+      font-weight: 600;
+    }
+  }
+}

@@ -1,24 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { auth } from "./firebase/firebase.utils";
+
+import "./App.scss";
+
+import Home from "./components/home/home.component";
+import SignUp from "./components/sign-up/sign-up.component";
+import SignIn from "./components/sign-in/sign-in.component";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      if (userAuth) {
+        setUser(userAuth);
+      } else {
+        setUser(null);
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => (user ? <Home /> : <Redirect to="/signup" />)}
+        />
+
+        <Route exact path="/signup">
+          {user ? <Redirect to="/" /> : <SignUp />}
+        </Route>
+        <Route exact path="/signin">
+          {user ? <Redirect to="/" /> : <SignIn />}
+        </Route>
+      </Switch>
     </div>
   );
 }

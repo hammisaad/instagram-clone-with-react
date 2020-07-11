@@ -1,0 +1,22 @@
+.home {
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .app__header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 10px 10px;
+    border-bottom: 1px solid lightgray;
+    object-fit: contain;
+    position: sticky;
+    width: 100%;
+    button {
+      margin-right: 20px;
+      padding: 0px 15px;
+      line-height: normal;
+    }
+  }
+}
